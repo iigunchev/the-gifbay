@@ -1,13 +1,23 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import Card from '../components/Card';
-import styles from '../styles/Home.module.css';
+import { PrismaClient } from '@prisma/client'
 
 import data from '../data/data.json';
 import Grid from '../components/Grid';
 import Layout from '../components/Layout';
 
-export default function Home() {
+ // Instantiate a new Prisma client
+const prisma = new PrismaClient()
+
+export async function getServerSideProps() {
+  const images = await prisma.image.findMany();
+  return {
+    props: {
+      // props for the Home component
+      data: JSON.parse(JSON.stringify(images)),
+    },
+  };
+}
+
+export default function Home({data = []}) {
   return (
     <Layout>
       <h1 className="text-xl font-medium text-gray-800">
