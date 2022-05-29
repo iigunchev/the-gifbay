@@ -1,6 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-
-import data from '../data/data.json';
 import Grid from '../components/Grid';
 import Layout from '../components/Layout';
 
@@ -11,7 +9,6 @@ export async function getServerSideProps() {
   const images = await prisma.image.findMany();
   return {
     props: {
-      // props for the Home component
       data: JSON.parse(JSON.stringify(images)),
     },
   };

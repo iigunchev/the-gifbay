@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSession, signOut } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -18,12 +19,12 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 
 const menuItems = [
   {
-    label: 'List a new home',
+    label: 'Upload a new image',
     icon: PlusIcon,
     href: '/list'
   },
   {
-    label: 'My homes',
+    label: 'Mi images',
     icon: HomeIcon,
     href: '/homes'
   },
@@ -35,17 +36,18 @@ const menuItems = [
   {
     label: 'Logout',
     icon: LogoutIcon,
-    onClick: () => null
+    onClick: signOut
   }
 ];
 
 const Layout = ({ children = null }) => {
   const router = useRouter();
 
-  const [showModal, setShowModal] = useState(false);
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const isLoadingUser = status === 'loading';
 
-  const user = null;
-  const isLoadingUser = false;
+  const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -74,11 +76,14 @@ const Layout = ({ children = null }) => {
                 </a>
               </Link>
               <div className="flex items-center space-x-4">
-                <Link href="/create">
-                  <a className="hidden sm:block hover:bg-gray-200 border-2 transition px-3 py-1 rounded-md">
-                    Upload
-                  </a>
-                </Link>
+                <button
+                  onClick={() => {
+                    session?.user ? router.push('/create') : openModal();
+                  }}
+                  className="hidden sm:block hover:bg-gray-200 transition px-3 py-1 rounded-md"
+                >
+                  Upload
+                </button>
                 {isLoadingUser ? (
                   <div className="h-8 w-[75px] bg-gray-200 animate-pulse rounded-md" />
                 ) : user ? (

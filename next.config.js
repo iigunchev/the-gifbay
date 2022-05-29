@@ -6,7 +6,8 @@ const nextConfig = {
       'media0.giphy.com',
       'media1.giphy.com',
       'nawpaeoevbjzsksiablk.supabase.co',
-      'nawpaeoevbjzsksiablk.supabase.in'
+      'nawpaeoevbjzsksiablk.supabase.in',
+      'lh3.googleusercontent.com'
     ]
   }
 };

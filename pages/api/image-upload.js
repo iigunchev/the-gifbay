@@ -19,7 +19,6 @@ export default async function handler(req, res) {
   // Upload image to Supabase
   if (req.method === 'POST') {
     let { image } = req.body;
-    console.log('image from post', image);
     if (!image) {
       return res.status(500).json({ message: 'No image provided' });
     }

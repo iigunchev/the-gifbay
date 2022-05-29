@@ -1,4 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
@@ -69,12 +70,13 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
   const [showConfirm, setConfirm] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
 
-  const signInWithEmail = async ({ email }) => {
-    // TODO: Perform email auth
-  };
-
   const signInWithGoogle = () => {
-    // TODO: Perform Google auth
+    toast.loading('Redirecting...');
+    setDisabled(true);
+    // Perform sign in
+    signIn('google', {
+      callbackUrl: window.location.href
+    });
   };
 
   const closeModal = () => {
@@ -192,7 +194,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                     </button>
 
                     {/* Sign with email */}
-                    <Formik
+                    {/* <Formik
                       initialValues={{ email: '' }}
                       validationSchema={SignInSchema}
                       validateOnBlur={false}
@@ -260,7 +262,7 @@ const AuthModal = ({ show = false, onClose = () => null }) => {
                           />
                         </Form>
                       )}
-                    </Formik>
+                    </Formik> */}
                   </div>
                 </div>
               </div>

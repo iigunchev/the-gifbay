@@ -56,13 +56,15 @@ const ListedImage = (image = null) => {
             </h1>
           </div>
         </div>
-        <div className="mt-6 relative aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg shadow-md overflow-hidden">
+        <div className="mt-6 relative">
           {image?.image ? (
             <Image
               src={image.image}
               alt={image.title}
-              layout="fill"
-              objectFit="cover"
+              width="100%"
+              height="100%"
+              layout="responsive"
+              objectFit="contain"
             />
           ) : null}
         </div>
