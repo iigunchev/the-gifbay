@@ -4,21 +4,12 @@ import Card from '../components/Card';
 import styles from '../styles/Home.module.css';
 
 import data from '../data/data.json';
+import Grid from '../components/Grid';
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <ul>
-        {data &&
-          data.map((item) => (
-            <Card
-              key={item.id}
-              image={item.image}
-              title={item.title}
-              tags={item.tags}
-            />
-          ))}
-      </ul>
+      <Grid items={data}/>
     </div>
   );
 }
