@@ -11,7 +11,7 @@ const Card = ({
   favorite = false,
   onClickFavorite = () => null
 }) => (
-  <Link href={`/public/assets/${id}`}>
+  <Link href={`/images/${id}`}>
     <a className="block w-full max-w-xs border-2 rounded-xl p-4">
       <div className="relative ">
         <div className="w-full mb-2 text-gray-700 font-semibold leading-tight">

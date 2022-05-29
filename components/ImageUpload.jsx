@@ -82,7 +82,7 @@ const ImageUpload = ({
           />
         ) : null}
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center py-12">
           {!image?.src ? (
             <div className="flex flex-col items-center space-y-2">
               <div className="shrink-0 rounded-full p-2 bg-gray-200 group-hover:scale-110 group-focus:scale-110 transition">

@@ -15,10 +15,11 @@ const Grid = ({ items = [] }) => {
       <span>Unfortunately, there is nothing to display yet.</span>
     </p>
   ) : (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {items.map((item) => (
         <Card
           key={item.id}
+          id={item.id}
           image={item.image}
           title={item.title}
           tags={item.tags}

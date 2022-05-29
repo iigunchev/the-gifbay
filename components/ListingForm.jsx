@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
@@ -25,7 +26,21 @@ const ListingForm = ({
   const [imageUrl, setImageUrl] = useState(initialValues?.image ?? '');
 
   const upload = async (image) => {
-    // TODO: Upload image to remote storage
+    if (!image) return;
+
+    let toastId;
+    try {
+      setDisabled(true);
+      toastId = toast.loading('Uploading...');
+      const { data } = await axios.post('/api/image-upload', { image });
+      setImageUrl(data?.url);
+      toast.success('Successfully uploaded', { id: toastId });
+    } catch (e) {
+      toast.error('Unable to upload', { id: toastId });
+      setImageUrl('');
+    } finally {
+      setDisabled(false);
+    }
   };
 
   const handleOnSubmit = async (values = null) => {
@@ -58,6 +73,7 @@ const ListingForm = ({
     <div>
       <div className="mb-8 max-w-md">
         <ImageUpload
+          className="py-8"
           initialImage={{ src: image, alt: initialFormValues.title }}
           onChangePicture={upload}
         />
@@ -88,7 +104,10 @@ const ListingForm = ({
                     {values.tags && values.tags.length > 0 ? (
                       values.tags.map((tag, index) => (
                         <div key={index} className="flex align-center gap-2">
-                          <Field name={`tags.${index}`} className="shadow-sm rounded-md mt-1 py-1 pl-4 border truncate focus:outline-none focus:ring-4 focus:ring-opacity-20 transition disabled:opacity-50 disabled:cursor-not-allowed border-gray-300 focus:border-gray-400 focus:ring-gray-400"/>
+                          <Field
+                            name={`tags.${index}`}
+                            className="shadow-sm rounded-md mt-1 py-1 pl-4 border truncate focus:outline-none focus:ring-4 focus:ring-opacity-20 transition disabled:opacity-50 disabled:cursor-not-allowed border-gray-300 focus:border-gray-400 focus:ring-gray-400"
+                          />
 
                           <button
                             type="button"
