@@ -1,0 +1,17 @@
+[
+  {
+    "id": "001",
+    "image": "https://media0.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif?cid=ecf05e47mbzxi6tu2mfr3xo6qkts8lgjf6ddb64qr21a56ql&rid=giphy.gif&ct=g",
+    "title": "This is fine",
+    "tags": ["meme", "it's fine", "dog burning room"],
+    "author": "Ivan"
+  },
+  {
+    "id": "002",
+    "image": "https://media0.giphy.com/media/geEvRnbQqLYsb5WOr8/giphy.gif?cid=ecf05e47b44yoru1odr0zs22weawnqz2xscw9l53nxfu59eq&rid=giphy.gif&ct=g",
+    "title": "Kombucha Girl",
+    "tags": ["reaction", "kombucha girl", "undecided", "well maybe"],
+    "author": "Luis"
+  }
+
+]
